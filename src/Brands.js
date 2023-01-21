@@ -1,20 +1,18 @@
-import React from "react";
+import { useSelector } from "react-redux";
+import Brand from "./Brand";
 
-class Brands extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: props.title || "Brands"
-    };
-  }
+export default function Brands(props) {
+  const brands = useSelector((state) => state.brands.names);
+  const brandNames = brands.map((name) => (
+    <li key={name}>
+      <Brand brandName={name} />
+    </li>
+  ));
 
-  render() {
-    return (
-      <div className="Brands">
-        <h2>{this.state.title}</h2>
-      </div>
-    );
-  }
+  return (
+    <div className="Brands">
+      <h2>{props.title || "Brands"}</h2>
+      <ul>{brandNames}</ul>
+    </div>
+  );
 }
-
-export default Brands;

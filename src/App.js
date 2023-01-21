@@ -5,7 +5,7 @@ export default function App() {
   return (
     <div className="App">
       <h1>Brand Orders</h1>
-      <Brands />
+      <Brands title="Our Brands" />
     </div>
   );
 }
