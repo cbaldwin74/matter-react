@@ -1,11 +1,19 @@
 import Order from "./Order";
 
 export default function Orders(props) {
-  const orders = props.orders.map((x, index) => (
-    <li key={index}>
-      <Order order={x} />
-    </li>
-  ));
+  const orders = props.orders.map((x, index) => {
+    let order = {
+      ...x,
+      index
+    };
+
+    return (
+      <li key={index}>
+        <Order brand={props.brand} order={order} />
+      </li>
+    );
+  });
+
   return (
     <div>
       <ul>{orders}</ul>

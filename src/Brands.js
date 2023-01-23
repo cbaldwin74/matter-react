@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Brand from "./Brand";
-import { addBrand } from "./features/brands/brandsSlice";
-import { addBrandOrders } from "./features/orders/ordersSlice";
+import { addBrand } from "./store/brands/brandsSlice";
+import { addBrandOrders } from "./store/orders/ordersSlice";
 
 export default function Brands(props) {
   const dispatch = useDispatch();
@@ -28,11 +28,14 @@ export default function Brands(props) {
   return (
     <div className="Brands">
       <h2>{props.title || "Brands"}</h2>
-      <input
-        type="text"
-        value={newBrand}
-        onChange={(event) => setNewBrand(event.target.value)}
-      />{" "}
+      <label>
+        Name:{" "}
+        <input
+          type="text"
+          value={newBrand}
+          onChange={(event) => setNewBrand(event.target.value)}
+        />
+      </label>{" "}
       <Button variant="primary" onClick={handleClick}>
         Add Brand
       </Button>
