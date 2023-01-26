@@ -5,6 +5,12 @@ import Brand from "./Brand";
 import { addBrand, deleteBrand } from "./store/brands/brandsSlice";
 import { addBrandOrders, deleteBrandOrders } from "./store/orders/ordersSlice";
 
+/**
+ * A component that disaplays a list of brands and orders for
+ * those brands.
+ *
+ * @param {*} props
+ */
 export default function Brands(props) {
   const dispatch = useDispatch();
   const brands = useSelector((state) => state.brands.names);

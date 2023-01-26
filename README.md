@@ -2,6 +2,12 @@
 
 ## Overview
 
+The solution is implemented as a ReactRedux app that displays brands and their related orders. The user is also able to add and delete brands and individual orders.
+
+![Image](ui.jpg)
+
+## Original Problem Statement
+
 Your team is building an admin app to track orders for different brands.
 
 You will be writing React code to display order information, and adding some basic controls for data manipulation.

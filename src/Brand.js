@@ -4,6 +4,10 @@ import Button from "react-bootstrap/Button";
 import Orders from "./Orders";
 import { addOrder } from "./store/orders/ordersSlice";
 
+/**
+ * A component that displays the details related to a
+ * brand including the orders for that brand.
+ */
 export default function Brand(props) {
   const brandOrders = useSelector((state) => state.orders.data);
   const orderData = brandOrders.find((x) => x.name === props.brandName).orders;

@@ -9,6 +9,11 @@ dayjs.extend(timezone);
 
 const tz = dayjs.tz.guess();
 
+/**
+ * A component that displays the details of a single order.
+ *
+ * @param {*} props
+ */
 export default function Order(props) {
   return (
     <div className="Order">
