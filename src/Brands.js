@@ -2,27 +2,40 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Brand from "./Brand";
-import { addBrand } from "./store/brands/brandsSlice";
-import { addBrandOrders } from "./store/orders/ordersSlice";
+import { addBrand, deleteBrand } from "./store/brands/brandsSlice";
+import { addBrandOrders, deleteBrandOrders } from "./store/orders/ordersSlice";
 
 export default function Brands(props) {
   const dispatch = useDispatch();
   const brands = useSelector((state) => state.brands.names);
+  // Build the list of Brand components
   const brandNames = brands.map((name) => (
     <li key={name}>
       <>
-        <Brand brandName={name} />
+        <Brand brandName={name} onBrandDelete={handleBrandDelete} />
         <hr />
       </>
     </li>
   ));
 
+  // State for the name of a brand to add
   const [newBrand, setNewBrand] = useState("");
 
-  function handleClick(e) {
+  /**
+   * Handle the Add Brand button click
+   */
+  function handleAddBrand(e) {
     dispatch(addBrandOrders(newBrand));
     dispatch(addBrand(newBrand));
     setNewBrand("");
+  }
+
+  /**
+   * Handle the delete brand event
+   */
+  function handleBrandDelete(brandName) {
+    dispatch(deleteBrand(brandName));
+    dispatch(deleteBrandOrders(brandName));
   }
 
   return (
@@ -36,7 +49,7 @@ export default function Brands(props) {
           onChange={(event) => setNewBrand(event.target.value)}
         />
       </label>{" "}
-      <Button variant="primary" onClick={handleClick}>
+      <Button variant="primary" onClick={handleAddBrand}>
         Add Brand
       </Button>
       <ul>{brandNames}</ul>

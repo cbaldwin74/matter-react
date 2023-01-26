@@ -2,21 +2,19 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Button from "react-bootstrap/Button";
 import Orders from "./Orders";
-import { deleteBrand } from "./store/brands/brandsSlice";
-import { addOrder, deleteBrandOrders } from "./store/orders/ordersSlice";
+import { addOrder } from "./store/orders/ordersSlice";
 
 export default function Brand(props) {
   const brandOrders = useSelector((state) => state.orders.data);
   const orderData = brandOrders.find((x) => x.name === props.brandName).orders;
   const dispatch = useDispatch();
 
-  function handleBrandDelete() {
-    dispatch(deleteBrand(props.brandName));
-    dispatch(deleteBrandOrders(props.brandName));
-  }
-
+  // State for the price value of the order to add
   const [newPrice, setNewPrice] = useState(0);
 
+  /**
+   * Handle adding an order to this brand
+   */
   function handleAddOrder(e) {
     dispatch(
       addOrder({
@@ -31,7 +29,10 @@ export default function Brand(props) {
     <div>
       <div className="Brand">
         {props.brandName}{" "}
-        <Button variant="danger" onClick={handleBrandDelete}>
+        <Button
+          variant="danger"
+          onClick={(e) => props.onBrandDelete(props.brandName)}
+        >
           Delete
         </Button>{" "}
         <label>

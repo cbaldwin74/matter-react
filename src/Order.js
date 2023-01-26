@@ -1,10 +1,8 @@
 import currency from "currency.js";
 import dayjs from "dayjs";
-import timezone from "dayjs/plugin/timezone";
-import { useDispatch } from "react-redux";
 import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import Button from "react-bootstrap/Button";
-import { deleteOrder } from "./store/orders/ordersSlice";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -12,22 +10,14 @@ dayjs.extend(timezone);
 const tz = dayjs.tz.guess();
 
 export default function Order(props) {
-  const dispatch = useDispatch();
-
-  function handleDelete(e) {
-    dispatch(
-      deleteOrder({
-        index: props.order.index,
-        name: props.brand
-      })
-    );
-  }
-
   return (
-    <div>
+    <div className="Order">
       {dayjs(props.order.date).tz(tz).format("YYYY-MM-DD HH:mm:ss")}{" "}
       {currency(props.order.price).format()}{" "}
-      <Button variant="danger" onClick={handleDelete}>
+      <Button
+        variant="danger"
+        onClick={(e) => props.onDelete(props.brand, props.order.index)}
+      >
         Delete
       </Button>
     </div>

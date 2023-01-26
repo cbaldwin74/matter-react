@@ -13,7 +13,7 @@ export const brandsSlice = createSlice({
     },
 
     deleteBrand: (state, action) => {
-      const index = state.names.find((x) => x === action.payload);
+      const index = state.names.findIndex((x) => x === action.payload);
       state.names.splice(index, 1);
     }
   }
